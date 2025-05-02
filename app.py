@@ -192,6 +192,12 @@ def seed_admin():
     db.session.commit()
     return "Admin user created. Username: admin, Password: password123"
 
+@app.route("/init_db")
+def init_db():
+    db.create_all()
+    return "✅ PostgreSQL tables created."
+
+
 # --- APP START ---
 
 if __name__ == "__main__":
