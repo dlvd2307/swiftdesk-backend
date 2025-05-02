@@ -179,13 +179,6 @@ def get_ticket_activities(ticket_id):
 
 # --- DATABASE RESET & ADMIN SEED ---
 
-@app.route("/reset_db")
-def reset_db():
-    if os.path.exists("swiftdesk.db"):
-        os.remove("swiftdesk.db")
-    db.create_all()
-    return "💣 Database dropped and recreated."
-
 @app.route("/seed_admin")
 def seed_admin():
     if User.query.filter_by(username="admin").first():
