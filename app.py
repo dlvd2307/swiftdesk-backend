@@ -3,9 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
+import os
 
 app = Flask(__name__)
-app.secret_key = 'CHANGE_THIS_SECRET_KEY_FOR_PRODUCTION'
+app.secret_key = os.environ.get("SECRET_KEY", "dev-fallback-key")
 
 CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
@@ -173,7 +174,12 @@ def get_ticket_activities(ticket_id):
     logs = Activity.query.filter_by(ticket_id=ticket.id).order_by(Activity.timestamp.desc()).all()
     return jsonify([log.serialize() for log in logs])
 
-# --- DB INIT ---
+# --- TEMP ROUTES FOR DEPLOYMENT SETUP ---
+
+@app.route("/init_db")
+def init_db():
+    db.create_all()
+    return "✅ Database initialized."
 
 @app.route("/seed_admin")
 def seed_admin():
@@ -188,7 +194,7 @@ def seed_admin():
     db.session.commit()
     return "Admin user created. Username: admin, Password: password123"
 
-# --- APP START ---
+# --- LOCAL DEV ENTRYPOINT ---
 
 if __name__ == "__main__":
     with app.app_context():
