@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: swiftdesk-backend
+    env: python
+    buildCommand: ""
+    startCommand: python app.py
+    startCommand: gunicorn app:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: SECRET_KEY
+        value: changemeinproduction
