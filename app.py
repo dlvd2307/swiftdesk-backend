@@ -174,13 +174,6 @@ def get_ticket_activities(ticket_id):
     logs = Activity.query.filter_by(ticket_id=ticket.id).order_by(Activity.timestamp.desc()).all()
     return jsonify([log.serialize() for log in logs])
 
-# --- TEMP ROUTES FOR DEPLOYMENT SETUP ---
-
-@app.route("/init_db")
-def init_db():
-    db.create_all()
-    return "✅ Database initialized."
-
 @app.route("/seed_admin")
 def seed_admin():
     if User.query.filter_by(username="admin").first():
