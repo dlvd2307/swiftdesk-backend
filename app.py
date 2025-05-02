@@ -177,10 +177,6 @@ def get_ticket_activities(ticket_id):
 
 # --- DEPLOYMENT INIT ROUTES ---
 
-@app.route("/init_db")
-def init_db():
-    db.create_all()
-    return "✅ Database initialized."
 
 @app.route("/seed_admin")
 def seed_admin():
