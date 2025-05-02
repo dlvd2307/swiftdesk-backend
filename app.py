@@ -33,6 +33,7 @@ class Ticket(db.Model):
     status = db.Column(db.String(20), default="Open")
     priority = db.Column(db.String(20), default="Low")
     submitted_by = db.Column(db.String(100), default="Unknown")
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
 
     activities = db.relationship('Activity', backref='ticket', cascade='all, delete-orphan')
 
@@ -43,7 +44,8 @@ class Ticket(db.Model):
             "description": self.description,
             "status": self.status,
             "priority": self.priority,
-            "submitted_by": self.submitted_by
+            "submitted_by": self.submitted_by,
+            "created_at": self.created_at.isoformat()
         }
 
 class Activity(db.Model):
@@ -175,8 +177,14 @@ def get_ticket_activities(ticket_id):
     logs = Activity.query.filter_by(ticket_id=ticket.id).order_by(Activity.timestamp.desc()).all()
     return jsonify([log.serialize() for log in logs])
 
-# --- DATABASE RESET (Temporary) ---
+# --- DATABASE RESET & ADMIN SEED ---
 
+@app.route("/reset_db")
+def reset_db():
+    if os.path.exists("swiftdesk.db"):
+        os.remove("swiftdesk.db")
+    db.create_all()
+    return "💣 Database dropped and recreated."
 
 @app.route("/seed_admin")
 def seed_admin():
