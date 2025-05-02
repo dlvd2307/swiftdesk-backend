@@ -12,6 +12,7 @@ CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///swiftdesk.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 db = SQLAlchemy(app)
 
 # --- MODELS ---
@@ -174,6 +175,13 @@ def get_ticket_activities(ticket_id):
     logs = Activity.query.filter_by(ticket_id=ticket.id).order_by(Activity.timestamp.desc()).all()
     return jsonify([log.serialize() for log in logs])
 
+# --- DEPLOYMENT INIT ROUTES ---
+
+@app.route("/init_db")
+def init_db():
+    db.create_all()
+    return "✅ Database initialized."
+
 @app.route("/seed_admin")
 def seed_admin():
     if User.query.filter_by(username="admin").first():
@@ -187,7 +195,7 @@ def seed_admin():
     db.session.commit()
     return "Admin user created. Username: admin, Password: password123"
 
-# --- LOCAL DEV ENTRYPOINT ---
+# --- APP START ---
 
 if __name__ == "__main__":
     with app.app_context():
