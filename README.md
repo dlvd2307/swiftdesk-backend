@@ -4,28 +4,28 @@
 
 ---
 
-## 🌐 Live Demo
+##  Live Demo
 
 - **Frontend**: [View on Vercel](https://swiftdesk-frontend.vercel.app)
 - **Backend**: [API on Render](https://swiftdesk-backend.onrender.com)
 
 ---
 
-## ⚙️ Features
+##  Features
 
-### 🧑‍💻 User Capabilities
+###  User Capabilities
 - Submit tickets with title and description
 - Auto-assigned priority (default: Low)
 - View real-time ticket status updates
 
-### 🛡️ Admin Capabilities
+###  Admin Capabilities
 - Login required for admin access
 - View all tickets grouped by status (Open, In Progress, Resolved, Closed)
 - Update ticket priority and status with dropdowns
 - Filter by priority, search by text, and track who submitted each ticket
 - Activity logs automatically track changes
 
-### 🧠 System Highlights
+###  System Highlights
 - PostgreSQL-backed persistence (no more data loss on deploy)
 - Responsive React frontend
 - Flask backend API with secure session management
@@ -33,7 +33,7 @@
 
 ---
 
-## 🧰 Tech Stack
+##  Tech Stack
 
 | Layer       | Tech                     |
 |-------------|--------------------------|
@@ -44,7 +44,7 @@
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### 1. Clone Repositories
 
@@ -100,7 +100,7 @@ npm start
 
 ---
 
-## 🔑 Admin Access
+##  Admin Access
 
 Once your backend is live, hit this endpoint **once** to seed the default admin user:
 
@@ -113,7 +113,7 @@ https://your-backend-url/seed_admin
 
 ---
 
-## 📌 Future Plans
+##  Future Plans
 
 - Attachments (images, files)
 - Email notifications
@@ -123,12 +123,12 @@ https://your-backend-url/seed_admin
 
 ---
 
-## 🤝 Contributions
+##  Contributions
 
 Forks and pull requests are welcome. SwiftDesk is open to enhancements or customization for your team or workflow.
 
 ---
 
-## 🪪 License
+##  License
 
 MIT © Dylan van Dijk
